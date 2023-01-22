@@ -1,0 +1,19 @@
+{
+  "files.autoSave": "onFocusChange",
+  "python.linting.pylintPath": ".venv/bin/pylint",
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
+  "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+  "python.linting.pycodestyleEnabled": false,
+  "cSpell.words": ["dotenv", "numpy", "openpyxl", "stri"],
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.venv/*/**": true
+  },
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "yapf",
+  "breadcrumbs.enabled": true
+}
