@@ -68,9 +68,9 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
 
 
 class Staff(models.Model):
-    user = models.OneToOneField(UserBase,
-                                on_delete=models.CASCADE,
-                                related_name="admin")
+    userbase = models.OneToOneField(UserBase,
+                                    on_delete=models.CASCADE,
+                                    related_name="admin")
     staff_id = models.TextField()
 
     is_active = models.BooleanField(default=True)
@@ -79,16 +79,16 @@ class Staff(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.user.email}"
+        return f"{self.userbase.email}"
 
     class Meta:
         ordering = ["-id"]
 
 
 class User(models.Model):
-    user = models.OneToOneField(UserBase,
-                                on_delete=models.CASCADE,
-                                related_name="client")
+    userbase = models.OneToOneField(UserBase,
+                                    on_delete=models.CASCADE,
+                                    related_name="client")
     staff_id = models.TextField()
 
     is_active = models.BooleanField(default=True)
@@ -97,7 +97,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.user.email}"
+        return f"{self.userbase.email}"
 
     class Meta:
         ordering = ["-id"]
