@@ -16,11 +16,16 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 100214400
 
 INSTALLED_APPS = [
     "users",
+
+    # libs
+    "jazzmin",
     "drf_yasg",
     "ckeditor",
     "rest_framework",
     "corsheaders",
     # "django_filters",
+
+    #default
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

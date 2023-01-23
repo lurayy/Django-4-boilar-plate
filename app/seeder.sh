@@ -4,4 +4,5 @@ rm */migrations/ -r
 rm media/ -r 
 python3 manage.py makemigrations users
 python3 manage.py migrate
+python3 manage.py collectstatic
 python3 manage.py shell < f_seeder.py
