@@ -1,6 +1,7 @@
 #!/bin/sh
 rm db.*
-rm */migrations -r 
+rm */migrations/ -r
+rm media/ -r 
 python3 manage.py makemigrations users
 python3 manage.py migrate
-python3 manage.py shell < z-c-der/seeder.py
+python3 manage.py shell < f_seeder.py

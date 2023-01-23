@@ -4,18 +4,18 @@ import argparse
 
 
 def parser():
-    local_parser = argparse.ArgumentParser()
-    local_parser.add_argument('--database',
-                              action='extend',
-                              nargs="+",
-                              type=str,
-                              help='db_name db_username db_password')
-    local_parser.add_argument('--email',
-                              action='extend',
-                              nargs="+",
-                              type=str,
-                              help='email_username email_password')
-    args = local_parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--database',
+                        action='extend',
+                        nargs="+",
+                        type=str,
+                        help='db_name db_username db_password')
+    parser.add_argument('--email',
+                        action='extend',
+                        nargs="+",
+                        type=str,
+                        help='email_username email_password')
+    args = parser.parse_args()
     db_name = None
     db_user = None
     db_password = None
@@ -38,24 +38,16 @@ def parser():
     chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 
     secret_key = ''.join(secrets.choice(chars) for i in range(length))
-    with open('../config.json', encoding='utf-8') as some:
-        config = json.load(some)
 
-    with open('.env', 'w', encoding='utf-8') as env:
+    with open('.env', 'w') as env:
         env.write(f'SECRET_KEY={secret_key}\n')
-        env.write("DEPLOY_URL=localhost\n")
-        env.write(f'TIMEZONE={config["timezone"]}\n')
-        env.write(f'PREFIX={config["deployment_name"]}\n')
+        env.write(f"DEPLOY_URL=localhost\n")
+        env.write(f'PREFIX="htr_"\n')
         env.write(f'DB_NAME={db_name}\n')
         env.write(f'DB_USER={db_user}\n')
         env.write(f'DB_PASSWORD={db_password}\n')
-        env.write(f'EMAIL_HOST={config["email_host"]}\n')
-        env.write(f'EMAIL_USER={email_user}\n')
-        env.write(f'EMAIL_PASSWORD={email_password}\n')
-        env.write(f'EMAIL_PORT={config["email_port"]}\n')
-        env.write(f'DEBUG={config["debug"]}\n')
-        env.write(f'CHANNEL={config["channel"]}')
-    return True
+        env.write(f'DEBUG=True\n')
+        env.write(f'CHANNEL=1')
 
 
 if __name__ == "__main__":
