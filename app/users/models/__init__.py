@@ -1,1 +1,1 @@
-from .users import UserBase, Staff, User
+from .users import UserBase, UserProfile

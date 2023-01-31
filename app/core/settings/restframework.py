@@ -31,9 +31,8 @@ REST_FRAMEWORK = {
     "page_size",
 }
 
-if not DEBUG:
-    REST_FRAMEWORK[
-        "EXCEPTION_HANDLER"] = "core.middlewares.core_exception_handler"
+# if not DEBUG:
+REST_FRAMEWORK["EXCEPTION_HANDLER"] = "core.middlewares.core_exception_handler"
 
 JAZZMIN_SETTINGS = {
     "site_title":

@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
+from core.utils.models import TimeStampModel
 
 
 class UserbaseManager(BaseUserManager):
@@ -38,7 +39,7 @@ def image_directory_path(instance, filename):
     return "users/{0}/profile_image.jpg".format(instance.email)
 
 
-class UserBase(AbstractBaseUser, PermissionsMixin):
+class UserBase(AbstractBaseUser, PermissionsMixin, TimeStampModel):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150)
@@ -52,9 +53,6 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name"]
 
@@ -67,37 +65,13 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
         ordering = ["-id"]
 
 
-class Staff(models.Model):
+class UserProfile(TimeStampModel, models.Model):
     userbase = models.OneToOneField(UserBase,
                                     on_delete=models.CASCADE,
-                                    related_name="admin")
-    staff_id = models.TextField()
-
-    is_active = models.BooleanField(default=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+                                    related_name='profile')
+    distance_ran = models.DecimalField(default=0.0,
+                                       max_digits=60,
+                                       decimal_places=2)
 
     def __str__(self):
         return f"{self.userbase.email}"
-
-    class Meta:
-        ordering = ["-id"]
-
-
-class User(models.Model):
-    userbase = models.OneToOneField(UserBase,
-                                    on_delete=models.CASCADE,
-                                    related_name="client")
-    staff_id = models.TextField()
-
-    is_active = models.BooleanField(default=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.userbase.email}"
-
-    class Meta:
-        ordering = ["-id"]

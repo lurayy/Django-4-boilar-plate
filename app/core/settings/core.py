@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "users",
 
     # libs
+    'django_filters',
     "jazzmin",
     "drf_yasg",
     "ckeditor",

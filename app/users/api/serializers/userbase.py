@@ -38,7 +38,7 @@ class UserBaseSerializer(serializers.ModelSerializer):
         model = UserBase
         fields = ('email', 'password', 'first_name', 'last_name', 'contact',
                   'profile_image', 'is_verified', 'last_login', 'is_staff',
-                  'roles', 'id', 'company_details', 'roles_id')
+                  'id')
 
         extra_kwargs = {
             'id': {
@@ -58,12 +58,6 @@ class UserBaseSerializer(serializers.ModelSerializer):
             },
             'password': {
                 'write_only': True
-            },
-            'company': {
-                'read_only': True
-            },
-            'roles': {
-                'read_only': True
             }
         }
 

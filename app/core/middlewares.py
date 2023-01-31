@@ -39,13 +39,14 @@ class DisableCSRF(object):
 
 
 def core_exception_handler(exc, context):
+    print('here')
     response = exception_handler(exc, context)
     if isinstance(exc, Exception):
+        print('has exception')
         err_data = {
             'status': False,
             'error': f'{exc.__class__.__name__}: {exc}'
         }
         logging.error(f"Original error detail and call stack: {exc}")
         return JsonResponse(err_data, safe=False, status=503)
-
     return response
